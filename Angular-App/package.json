@@ -1,0 +1,21 @@
+{
+  "name": "myapp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "",
+  "scripts": {
+    "start": "live-server --open=src --port=3000 --host=127.0.0.1"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4",
+    "node": "0.0.0",
+    "bootstrap": "^4.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "jquery": "^3.2.1"
+  }
+}
