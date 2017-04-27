@@ -7,6 +7,11 @@
 
 ## Server
 
+Type | Description
+--------|---------
+SimpleServer | Minimalist server requirements to receive get and post requests, including parsing form data
+
+
 ---
 
 ## React App
