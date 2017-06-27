@@ -1,3 +1,133 @@
+# Redux Requirements
+
+### package.json
+```js
+  "dependencies": {
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "seamless-immutable": "^7.1.2"
+  },
+```
+
+### Create the store in top level component
+
+```js
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import reducer from './store/reducers';
+
+const middleware = [thunk, createLogger()];
+// createLogger can be turned off for production
+
+const store = createStore(
+  reducer,
+  applyMiddleware(...middleware),
+
+  // following is for Redux dev tools
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
+
+ReactDOM.render(
+  // Wrap component in the Provider
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app'));
+
+```
+
+
+### "Smart" component = "Container"
+
+```js
+
+import { connect } from 'react-redux';
+
+// Import actions for dispatch
+import { saveText, clearText, saveText2, clearText2 } from '../store/actions';
+
+// Example dispatch
+const { dispatch } = this.props;
+dispatch(saveText(this.state.input1));
+
+// Get state from redux
+function mapStateToProps(state) {
+  const { input1State, input2State } = state;
+  const { text1 } = input1State;
+  const { text2 } = input2State;
+  return {
+    text1,
+    text2,
+  };
+}
+
+export default connect(mapStateToProps)(App);
+
+```
+
+### Sample Action Type, Action, and Reducer
+
+**Action Type**
+
+```js
+export const SAVE_TEXT = 'SAVE_TEXT';
+```
+
+**Action**
+
+```js
+import * as types from './actionTypes';
+
+export const saveText = text => ({
+  type: types.SAVE_TEXT,
+  text,
+});
+```
+
+**Reducer**
+
+```js
+
+import { combineReducers } from 'redux';
+import Immutable from 'seamless-immutable';
+import * as types from './actionTypes';
+
+const input1State = (state = Immutable({
+  text1: '',
+}), action) => {
+  switch (action.type) {
+    case types.SAVE_TEXT: {
+      return Immutable({
+        text1: action.text,
+      });
+    }
+    case types.CLEAR_TEXT: {
+      return Immutable({
+        text1: '',
+      });
+    }
+    default:
+      return state;
+  }
+};
+
+// NOTE: input2State omitted
+
+const rootReducer = combineReducers({
+  input1State,
+  input2State,
+});
+
+export default rootReducer;
+```
+
+
+---
+
 # Minimum React App Requirements:
 
 ### package.json

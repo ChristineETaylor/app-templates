@@ -10,7 +10,7 @@ class App extends Component {
   }
 
   render() {
-    return <h1>{ this.state.text }</h1>;
+    return <h2>{ this.state.text }</h2>;
   }
 }
 
