@@ -1,5 +1,4 @@
-# Minimum webpack config requirements:
-
+# Minimum React App  Requirements:
 
 ### package.json
 ```js
@@ -34,8 +33,6 @@ babel-presets | a set of plugins used to support particular language features
 css-loader | loads / imports the CSS file
 style-loader | takes the CSS and inserts the styling into the page
 html-webpack-plugin | generates the dist index.html file, for example adds the script tag for the bundle.js
-
-
 
 ### .babelrc
 - Specifies the babel presets: language rules supported
